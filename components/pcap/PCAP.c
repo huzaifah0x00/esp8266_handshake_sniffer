@@ -34,19 +34,21 @@ void pcap_start_serial(){
 }
 
 /* write packet to Serial */
-void pcap_new_packet_serial(uint32_t ts_sec, uint32_t ts_usec, uint32_t len, uint8_t* buf){
+void pcap_new_packet_serial(uint32_t ts_sec, uint32_t ts_usec, uint32_t len, void* buf){
   uint32_t orig_len = len;
   uint32_t incl_len = len;
 
+// packate header
   serialwrite_32(ts_sec);
   serialwrite_32(ts_usec);
   serialwrite_32(incl_len);
   serialwrite_32(orig_len);
+//
 
-  uart_write_bytes(UART_NUM_0, (char* ) buf, incl_len);
+// payload
+  uart_write_bytes(UART_NUM_0, (const char* ) buf, incl_len);
 }
 
-/* write packet to file */
 
 /* converts a 32 bit integer into 4 bytes */
 void escape32(uint32_t n, char* buf){

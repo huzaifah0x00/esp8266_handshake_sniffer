@@ -13,7 +13,7 @@
 #include "freertos/FreeRTOS.h"
 
     void pcap_start_serial();
-    void pcap_new_packet_serial(uint32_t ts_sec, uint32_t ts_usec, uint32_t len, uint8_t* buf);
+    void pcap_new_packet_serial(uint32_t ts_sec, uint32_t ts_usec, uint32_t len, void* buf);
 
     extern uint32_t magic_number ;//= 0xa1b2c3d4;
     extern uint16_t version_major ;//= 2;
